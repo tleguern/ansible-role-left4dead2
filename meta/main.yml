@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: left4dead2
+  author: Tristan Le Guern
+  description: Configure a Left 4 Dead 2 server
+  company: Gwern
+  license: ISC
+  min_ansible_version: 2.9
+  platforms:
+    - name: Ubuntu
+    - name: Debian
+  galaxy_tags:
+    - left4dead2
+    - l4d2
+dependencies: []

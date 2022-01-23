@@ -1,0 +1,12 @@
+[Unit]
+Description=Left 4 Dead 2 Dedicated Server
+Documentation=https://developer.valvesoftware.com/wiki/Source_Dedicated_Server
+After=syslog.target network.target
+
+[Service]
+User={{ steamcmd_user }}
+ExecStart=/home/{{ steamcmd_user }}/left4dead2/srcds_run -console -game left4dead2 +map c1m1_hotel -port {{ left4dead2_port }} +ip {{ left4dead2_ip }} -insecure
+KillMode=control-group
+
+[Install]
+WantedBy=default.target

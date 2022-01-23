@@ -1,0 +1,62 @@
+---
+- name: Ensure Left 4 Dead 2 dedicated server is up to date (this task can be very long)
+  command: "{{ steamcmd_bin }} +login anonymous +app_update 222860 +quit"
+  register: __left4dead2_update
+  changed_when: "'already up to date' not in __left4dead2_update.stdout"
+  become_user: "{{ steamcmd_user }}"
+
+- name: Create a symlink to steam home directory
+  file:
+    src: "/home/{{ steamcmd_user }}/.steam/steamapps/common/Left 4 Dead 2 Dedicated Server"
+    dest: "/home/{{ steamcmd_user }}/left4dead2"
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
+    state: link
+
+- name: Ensure host.txt is installed
+  template:
+    dest: "/home/{{ steamcmd_user }}/left4dead2/left4dead2/cfg/host.txt"
+    src: host.txt.j2
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
+    mode: 0644
+  when: left4dead2_host
+  notify: Restart left4dead2
+
+- name: Ensure motd.txt is installed
+  template:
+    dest: "/home/{{ steamcmd_user }}/left4dead2/left4dead2/cfg/motd.txt"
+    src: motd.txt.j2
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
+    mode: 0644
+  when: left4dead2_motd
+  notify: Restart left4dead2
+
+- name: Ensure server.cfg is installed
+  template:
+    dest: "/home/{{ steamcmd_user }}/left4dead2/left4dead2/cfg/server.cfg"
+    src: server.cfg.j2
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
+    mode: 0644
+  notify: Restart left4dead2
+
+- name: Ensure systemd unit is installed
+  template:
+    src: left4dead2.service.j2
+    dest: /etc/systemd/system/left4dead2.service
+  notify: Reload systemd
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Ensure left4dead2 is enabled at boot
+  service:
+    name: left4dead2
+    enabled: yes
+
+- name: Ensure left4dead2 is started
+  service:
+    name: left4dead2
+    state: started

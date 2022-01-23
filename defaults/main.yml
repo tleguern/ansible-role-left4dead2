@@ -1,0 +1,15 @@
+---
+steamcmd_user: steam
+steamcmd_bin: /usr/games/steamcmd
+left4dead2_motd: |
+  <html>
+  <head>
+    <title>Left 4 Dead 2</title>
+  </head>
+  <body scroll="no">
+    <pre>Zombie zombie zombie</pre>
+  </body>
+  </html>
+left4dead2_server_cfg: ""
+left4dead2_port: 27015
+left4dead2_ip: 0.0.0.0
