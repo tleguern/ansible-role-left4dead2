@@ -1,4 +1,8 @@
 ---
+- name: Check if steam_home is defined.
+  assert:
+    that: steam_home is defined
+
 - name: Ensure Left 4 Dead 2 dedicated server is up to date (this task can be very long)
   command: "{{ steamcmd_bin }} +login anonymous +app_update 222860 +quit"
   register: __left4dead2_update
