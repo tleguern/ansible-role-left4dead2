@@ -1,0 +1,66 @@
+---
+- name: l4dtoolz | Check if l4dtoolz is installed.
+  stat:
+    path: "{{ l4dtoolz_install_path }}/addons/metamod/l4dtoolz.vdf"
+  register: __l4dtoolz_exists
+
+- name: l4dtoolz | Check if l4dtoolz was installed using ansible
+  stat:
+    path: "{{ l4dtoolz_install_path }}/addons/l4dtoolz/version.txt"
+  register: __l4dtoolz_exists_ansible
+  when: __l4dtoolz_exists.stat.exists
+
+- name: l4dtoolz | Check the currently installed version of l4dtoolz.
+  command:
+    cmd: grep -qF {{ l4dtoolz_version }} "{{ l4dtoolz_install_path }}/addons/l4dtoolz/version.txt"
+  register: __l4dtoolz_current_version
+  changed_when: no
+  failed_when: no
+  when:
+    - __l4dtoolz_exists.stat.exists
+    - __l4dtoolz_exists_ansible.stat.exists
+
+- name: l4dtoolz | Remove the previous version.
+  file:
+    path: "{{ l4dtoolz_install_path }}/{{ item }}"
+    state: absent
+  loop:
+    - addons/metamod/l4dtoolz.vdf
+    - addons/l4dtoolz/
+  when:
+    - __l4dtoolz_exists.stat.exists
+    - not __l4dtoolz_exists_ansible.stat.exists
+      or __l4dtoolz_current_version.rc != 0
+
+- name: l4dtoolz | Install l4dtoolz
+  when: 'not __l4dtoolz_exists.stat.exists or not __l4dtoolz_exists_ansible.stat.exists or __l4dtoolz_current_version.rc != 0'
+  block:
+    - name: l4dtoolz | Download the requested version.
+      become: no
+      get_url:
+        url: "{{ l4dtoolz_url }}/{{ l4dtoolz_version }}/{{ l4dtoolz_target }}"
+        dest: /tmp
+        mode: 0644
+
+    - name: l4dtoolz | Extract the downloaded file.
+      unarchive:
+        remote_src: yes
+        src: "/tmp/{{ l4dtoolz_target }}"
+        dest: "{{ l4dtoolz_install_path }}/"
+        owner: "{{ steamcmd_user }}"
+        group: "{{ steamcmd_user }}"
+
+    - name: l4dtoolz | Remove the archive.
+      become: no
+      file:
+        path: "/tmp/{{ l4dtoolz_target }}"
+        state: absent
+
+    - name: l4dtoolz | Write the current l4dtoolz version.
+      copy:
+        dest: "{{ l4dtoolz_install_path }}/addons/l4dtoolz/version.txt"
+        content: "{{ l4dtoolz_version }}"
+        owner: "{{ steamcmd_user }}"
+        group: "{{ steamcmd_user }}"
+        mode: 0644
+      notify: "Restart left4dead2"

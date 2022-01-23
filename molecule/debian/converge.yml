@@ -9,6 +9,7 @@
     left4dead2_server_cfg: |
       hostname "SourceHut test Left 4 Dead 2 Server"
       rcon_password srht
+    l4dtoolz_enable: yes
   tasks:
     - name: "Include tleguern.steamcmd"
       include_role:
