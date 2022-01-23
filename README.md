@@ -21,6 +21,7 @@ An ansible role dedicated to the installation of SteamCMD such as [ansible-steam
 | `left4dead2_server_cfg` | Server configuration | See below |
 | `left4dead2_port` | Network port | `27015` |
 | `left4dead2_ip` | IP address to listen on | `0.0.0.0` |
+| `left4dead2_host` | HTTP link to a display banner | none |
 
 ### `left4dead2_motd`
 

@@ -7,7 +7,7 @@
 
 - name: Create a symlink to steam home directory
   file:
-    src: "/home/{{ steamcmd_user }}/.steam/steamapps/common/Left 4 Dead 2 Dedicated Server"
+    src: "{{ steam_home }}/steamapps/common/Left 4 Dead 2 Dedicated Server"
     dest: "/home/{{ steamcmd_user }}/left4dead2"
     owner: "{{ steamcmd_user }}"
     group: "{{ steamcmd_user }}"
