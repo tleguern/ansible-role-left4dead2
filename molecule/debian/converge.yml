@@ -9,6 +9,7 @@
     left4dead2_server_cfg: |
       hostname "SourceHut test Left 4 Dead 2 Server"
       rcon_password srht
+    metamod_source_install_path: /home/steam/left4dead2/left4dead2
   roles:
     - role: "tleguern.steamcmd"
     - role: "ansible-role-left4dead2"
