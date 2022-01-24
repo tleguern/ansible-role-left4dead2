@@ -9,11 +9,9 @@
     left4dead2_server_cfg: |
       hostname "SourceHut test Left 4 Dead 2 Server"
       rcon_password srht
-    l4dtoolz_enable: yes
-  tasks:
-    - name: "Include tleguern.steamcmd"
-      include_role:
-        name: "tleguern.steamcmd"
-    - name: "Include ansible-role-left4dead2"
-      include_role:
-        name: "ansible-role-left4dead2"
+  roles:
+    - role: "tleguern.steamcmd"
+    - role: "ansible-role-left4dead2"
+    - role: "tleguern.metamod-source"
+    - role: "ansible-role-left4dead2"
+      l4dtoolz_enable: yes
