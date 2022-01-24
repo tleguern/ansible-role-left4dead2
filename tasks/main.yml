@@ -34,7 +34,6 @@
     owner: "{{ steamcmd_user }}"
     group: "{{ steamcmd_user }}"
     mode: 0644
-  when: left4dead2_motd
   notify: Restart left4dead2
 
 - name: Ensure server.cfg is installed
