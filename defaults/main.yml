@@ -1,6 +1,7 @@
 ---
 steamcmd_user: steam
 steamcmd_bin: /usr/games/steamcmd
+left4dead2_host: ""
 left4dead2_motd: |
   <html>
   <head>
