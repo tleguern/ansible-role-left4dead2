@@ -5,7 +5,7 @@ An Ansible role that installs and configures a Left 4 Dead 2 dedicated server.
 The game server is downloaded thought Steam and exposed as a systemd service for easier management.
 Using this role it is possible to publish a minimalist server.
 
-Automatic testing is provided using molecule's delegated driver and <https://builds.sr.ht>.
+Automatic testing is disabled for this project as it is too long and expensive.
 
 ## Requirements
 
