@@ -14,10 +14,3 @@ left4dead2_motd: |
 left4dead2_server_cfg: ""
 left4dead2_port: 27015
 left4dead2_ip: 0.0.0.0
-
-# l4dtoolz
-l4dtoolz_enable: no
-l4dtoolz_url: https://github.com/Accelerator74/l4dtoolz/releases/download/
-l4dtoolz_version: "1.1.0.1"
-l4dtoolz_target: L4DToolZ-l4d2-f5e47d6.zip
-l4dtoolz_install_path: "/home/{{ steamcmd_user }}/left4dead2/left4dead2"

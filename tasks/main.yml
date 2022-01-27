@@ -54,9 +54,6 @@
 - name: Flush handlers
   meta: flush_handlers
 
-- include_tasks: left4toolz.yml
-  when: l4dtoolz_enable
-
 - name: Ensure left4dead2 is enabled at boot
   service:
     name: left4dead2
