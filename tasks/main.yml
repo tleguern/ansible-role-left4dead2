@@ -19,7 +19,7 @@
 
 - name: Ensure host.txt is installed
   template:
-    dest: "/home/{{ steamcmd_user }}/left4dead2/left4dead2/cfg/host.txt"
+    dest: "/home/{{ steamcmd_user }}/left4dead2/left4dead2/host.txt"
     src: host.txt.j2
     owner: "{{ steamcmd_user }}"
     group: "{{ steamcmd_user }}"
@@ -29,7 +29,7 @@
 
 - name: Ensure motd.txt is installed
   template:
-    dest: "/home/{{ steamcmd_user }}/left4dead2/left4dead2/cfg/motd.txt"
+    dest: "/home/{{ steamcmd_user }}/left4dead2/left4dead2/motd.txt"
     src: motd.txt.j2
     owner: "{{ steamcmd_user }}"
     group: "{{ steamcmd_user }}"
