@@ -5,7 +5,7 @@ After=syslog.target network.target
 
 [Service]
 User={{ steamcmd_user }}
-ExecStart=/home/{{ steamcmd_user }}/left4dead2/srcds_run -console -game left4dead2 +map c1m1_hotel -port {{ left4dead2_port }} +ip {{ left4dead2_ip }} -insecure
+ExecStart=/home/{{ steamcmd_user }}/left4dead2/srcds_run -console -game left4dead2 +map c1m1_hotel -port {{ left4dead2_port }} +ip {{ left4dead2_ip }}
 KillMode=control-group
 
 [Install]
